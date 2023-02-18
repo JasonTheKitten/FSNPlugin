@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'kr.entree.spigradle' version '2.4.3'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+repositories {
+    mavenCentral()
+    spigotmc()
+}
+
+dependencies {
+    compileOnly spigot('1.19.3')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+group = 'everyos.plugin.fns'
+version = '0.1.0'
+description = 'Custom plugin for Fate Stay Night server'
+java.sourceCompatibility = JavaVersion.VERSION_17
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
