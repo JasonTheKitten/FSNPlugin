@@ -12,6 +12,7 @@ import everyos.plugin.fsn.commandrunner.CommandArguments;
 import everyos.plugin.fsn.commandrunner.GeneralCommand;
 import everyos.plugin.fsn.commandrunner.MCCommand;
 import everyos.plugin.fsn.commandrunner.PlayerCommand;
+import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
 import everyos.plugin.fsn.mcabstract.MCCommandSender;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
 import everyos.plugin.fsn.mcabstract.bukkit.BukkitMCCommandSender;
@@ -37,11 +38,16 @@ public class BukkitTabCompleter implements TabCompleter {
 			sender = new BukkitMCCommandSender(plugin, rawSender);
 		}
 		
-		if (command instanceof PlayerCommand && sender instanceof MCPlayer) {
-			return ((PlayerCommand) command).autocomplete((MCPlayer) sender, arguments);
-		} else if (command instanceof GeneralCommand) {
-			return ((GeneralCommand) command).autocomplete(sender, arguments);
+		try {
+			if (command instanceof PlayerCommand && sender instanceof MCPlayer) {
+				return ((PlayerCommand) command).autocomplete((MCPlayer) sender, arguments);
+			} else if (command instanceof GeneralCommand) {
+				return ((GeneralCommand) command).autocomplete(sender, arguments);
+			}
+		} catch (InvalidArgumentException e) {
+			return List.of();
 		}
+		
 		return null;
 	}
 

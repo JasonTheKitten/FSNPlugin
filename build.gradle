@@ -45,9 +45,9 @@ spigot {
     apiVersion = '1.19'
     commands {
         fsn {
-            aliases 'test'
-            description = 'Test command'
-            usage = '/<command>'
+            aliases 'stats'
+            description = 'Item stats manipulation command'
+            usage = '/<command> <subcommand> <statname> [amount]'
         }
     }
     excludeLibraries = [

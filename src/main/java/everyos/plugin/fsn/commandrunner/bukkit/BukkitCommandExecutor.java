@@ -10,6 +10,8 @@ import everyos.plugin.fsn.commandrunner.CommandArguments;
 import everyos.plugin.fsn.commandrunner.GeneralCommand;
 import everyos.plugin.fsn.commandrunner.MCCommand;
 import everyos.plugin.fsn.commandrunner.PlayerCommand;
+import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
+import everyos.plugin.fsn.localization.LocalizedException;
 import everyos.plugin.fsn.mcabstract.MCCommandSender;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
 import everyos.plugin.fsn.mcabstract.bukkit.BukkitMCCommandSender;
@@ -35,14 +37,20 @@ public class BukkitCommandExecutor implements CommandExecutor {
 			sender = new BukkitMCCommandSender(plugin, rawSender);
 		}
 		
-		if (command instanceof PlayerCommand) {
-			if (!(sender instanceof MCPlayer)) {
-				sender.sendLocalizedMessage("player.noconsole");
-				return false; //TODO
+		try {
+			if (command instanceof PlayerCommand) {
+				if (!(sender instanceof MCPlayer)) {
+					sender.sendLocalizedMessage("player.noconsole");
+					return false; //TODO
+				}
+				return ((PlayerCommand) command).execute((MCPlayer) sender, arguments);
+			} else if (command instanceof GeneralCommand) {
+				return ((GeneralCommand) command).execute(sender, arguments);
 			}
-			return ((PlayerCommand) command).execute((MCPlayer) sender, arguments);
-		} else if (command instanceof GeneralCommand) {
-			return ((GeneralCommand) command).execute(sender, arguments);
+		} catch (InvalidArgumentException e) {
+			return false;
+		} catch (LocalizedException e) {
+			sender.sendLocalizedMessage(e.getLabel(), e.getFillins());
 		}
 		
 		return false;

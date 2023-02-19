@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 
 import de.leonhard.storage.Toml;
@@ -16,18 +15,18 @@ public class LocalizationProviderImp implements LocalizationProvider {
 
 	public LocalizationProviderImp(Plugin plugin, String lang) {
 		this.config = new Toml(
-			"messages",
+			"messages/"+ lang,
 			plugin.getDataFolder().toString(),
 			plugin.getClass().getClassLoader().getResourceAsStream("messages/"+ lang + ".toml"));
+		config.forceReload();
 	}
 	
 	@Override
 	public String localize(String path, String... fillins) {
 		String rawMsg = config.get(path, path);
 		String filledMsg = StringSubstitutor.replace(rawMsg, fillinsToMap(fillins), "%", "%");
-		String coloredMsg = ChatColor.translateAlternateColorCodes('&', filledMsg);
 		
-		return coloredMsg;
+		return filledMsg;
 	}
 
 	private Map<String, String> fillinsToMap(String[] fillins) {

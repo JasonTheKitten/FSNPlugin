@@ -2,8 +2,8 @@ package everyos.plugin.fsn.commandrunner.bukkit;
 
 import java.util.List;
 
-import everyos.plugin.fsn.commandrunner.ArgumentReader;
 import everyos.plugin.fsn.commandrunner.CommandArguments;
+import everyos.plugin.fsn.commandrunner.argument.ArgumentReader;
 
 public class BukkitCommandArguments implements CommandArguments {
 
@@ -23,6 +23,16 @@ public class BukkitCommandArguments implements CommandArguments {
 	@Override
 	public <T> List<String> autocomplete(int index, ArgumentReader<T> reader) {
 		return reader.autocomplete(args[index + offset]);
+	}
+
+	@Override
+	public int length() {
+		return args.length - offset;
+	}
+
+	@Override
+	public CommandArguments offset(int i) {
+		return new BukkitCommandArguments(args, offset + i);
 	}
 
 }

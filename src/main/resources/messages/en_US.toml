@@ -1,2 +1,6 @@
 [player]
-noconsole = "You cannot run this command in the console."
+noconsole = "You cannot run this command in the console!"
+handisempty = "You cannot run this command with an empty hand!"
+
+[item]
+statvalue = "That stat is set to %value%."
