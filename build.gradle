@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+
 plugins {
     id 'java'
     id 'kr.entree.spigradle' version '2.4.3'
@@ -7,10 +9,13 @@ plugins {
 repositories {
     mavenCentral()
     spigotmc()
+    jitpack()
 }
 
 dependencies {
     compileOnly spigot('1.19.3')
+    implementation 'com.github.simplix-softworks:simplixstorage:3.2.5'
+    implementation 'org.apache.commons:commons-text:1.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 
@@ -21,4 +26,31 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+task relocateShadowJar(type: ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+    prefix = "ua" // Default value is "shadow"
+}
+
+tasks.prepareSpigotPlugins.dependsOn shadowJar
+tasks.shadowJar.dependsOn tasks.relocateShadowJar
+
+shadowJar {
+    classifier = null
+}
+
+spigot {
+    authors = ['EveryOS']
+    apiVersion = '1.19'
+    commands {
+        fsn {
+            aliases 'test'
+            description = 'Test command'
+            usage = '/<command>'
+        }
+    }
+    excludeLibraries = [
+        "*"
+    ]
 }

@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import everyos.plugin.fsn.commandrunner.CommandRegistry;
+import everyos.plugin.fsn.commandrunner.bukkit.BukkitMCCommandRegistry;
 import everyos.plugin.fsn.imp.FSNInstanceImp;
 
 public class FSNPlugin extends JavaPlugin {
@@ -18,7 +20,10 @@ public class FSNPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		this.instance = new FSNInstanceImp();
+		this.instance = new FSNInstanceImp(this);
+		
+		CommandRegistry registry = new BukkitMCCommandRegistry(this);
+		
 		logger.info("Plugin enabled!");
 	}
 	
@@ -27,6 +32,10 @@ public class FSNPlugin extends JavaPlugin {
 		instance.quit();
 		this.instance = null;
 		logger.info("Plugin disabled!");
+	}
+	
+	public FSNInstance getCurrentInstance() {
+		return instance;
 	}
 	
 }
