@@ -10,8 +10,10 @@ import everyos.plugin.fsn.commandrunner.bukkit.BukkitMCCommandRegistry;
 import everyos.plugin.fsn.mcabstract.MCPluginBase;
 import everyos.plugin.fsn.mcabstract.MCTaskScheduler;
 import everyos.plugin.fsn.mcabstract.event.MCEventListener;
+import everyos.plugin.fsn.mcabstract.event.MCPlayerDeathEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerJoinEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLeaveEventListener;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerDeathEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerJoinEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerLeaveEventListenerWrapper;
 
@@ -39,11 +41,14 @@ public class BukkitMCPluginBase implements MCPluginBase {
 	
 	@Override
 	public void registerEventListener(MCEventListener listener) {
-		if (listener instanceof MCPlayerJoinEventListener joinEventListener) {
-			addEvent(new PlayerJoinEventListenerWrapper(plugin, joinEventListener));
+		if (listener instanceof MCPlayerJoinEventListener eventListener) {
+			addEvent(new PlayerJoinEventListenerWrapper(plugin, eventListener));
 		}
-		if (listener instanceof MCPlayerLeaveEventListener leaveEventListener) {
-			addEvent(new PlayerLeaveEventListenerWrapper(plugin, leaveEventListener));
+		if (listener instanceof MCPlayerLeaveEventListener eventListener) {
+			addEvent(new PlayerLeaveEventListenerWrapper(plugin, eventListener));
+		}
+		if (listener instanceof MCPlayerDeathEventListener eventListener) {
+			addEvent(new PlayerDeathEventListenerWrapper(plugin, eventListener));
 		}
 	}
 	
