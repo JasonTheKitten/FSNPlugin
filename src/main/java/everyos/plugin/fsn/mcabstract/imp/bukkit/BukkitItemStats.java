@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.mcabstract.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
-import everyos.plugin.fsn.stats.ItemStats;
-import everyos.plugin.fsn.stats.StatAdjustor;
+import everyos.plugin.fsn.mcabstract.stats.ItemStats;
+import everyos.plugin.fsn.mcabstract.stats.StatAdjustor;
 import everyos.plugin.fsn.stats.util.StatsUtil;
 
 public class BukkitItemStats implements ItemStats {

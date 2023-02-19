@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.mcabstract.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit;
 
 import org.bukkit.inventory.PlayerInventory;
 

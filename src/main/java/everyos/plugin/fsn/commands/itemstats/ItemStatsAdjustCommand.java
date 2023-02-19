@@ -11,8 +11,8 @@ import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
 import everyos.plugin.fsn.commandrunner.argument.OptionsArgumentReader;
 import everyos.plugin.fsn.localization.LocalizedException;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
-import everyos.plugin.fsn.stats.ItemStats;
-import everyos.plugin.fsn.stats.StatAdjustor;
+import everyos.plugin.fsn.mcabstract.stats.ItemStats;
+import everyos.plugin.fsn.mcabstract.stats.StatAdjustor;
 
 public class ItemStatsAdjustCommand implements PlayerCommand {
 	

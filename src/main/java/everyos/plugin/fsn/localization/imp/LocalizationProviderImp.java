@@ -1,10 +1,10 @@
 package everyos.plugin.fsn.localization.imp;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.text.StringSubstitutor;
-import org.bukkit.plugin.Plugin;
 
 import de.leonhard.storage.Toml;
 import everyos.plugin.fsn.localization.LocalizationProvider;
@@ -13,12 +13,12 @@ public class LocalizationProviderImp implements LocalizationProvider {
 
 	private Toml config;
 
-	public LocalizationProviderImp(Plugin plugin, String lang) {
+	public LocalizationProviderImp(File saveFolder, String lang) {
 		
 		this.config = new Toml(
 			"messages/"+ lang,
-			plugin.getDataFolder().toString(),
-			plugin.getClass().getClassLoader().getResourceAsStream("messages/" + lang + ".toml"));
+			saveFolder.toString(),
+			getClass().getClassLoader().getResourceAsStream("messages/" + lang + ".toml"));
 	}
 	
 	@Override

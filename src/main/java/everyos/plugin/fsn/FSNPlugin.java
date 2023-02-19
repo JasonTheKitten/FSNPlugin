@@ -4,16 +4,14 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import everyos.plugin.fsn.commandrunner.CommandRegistry;
-import everyos.plugin.fsn.commandrunner.bukkit.BukkitMCCommandRegistry;
-import everyos.plugin.fsn.commands.itemstats.ItemStatsCommand;
 import everyos.plugin.fsn.imp.FSNInstanceImp;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCPluginBase;
 
 public class FSNPlugin extends JavaPlugin {
 
 	private final Logger logger;
 	
-	private FSNInstanceImp instance;
+	private FSNInstance instance;
 	
 	public FSNPlugin() {
 		this.logger = Logger.getLogger(getClass().getName());
@@ -21,11 +19,7 @@ public class FSNPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		this.instance = new FSNInstanceImp(this);
-		
-		CommandRegistry registry = new BukkitMCCommandRegistry(this);
-		registry.addCommand("itemstats", new ItemStatsCommand());
-		
+		this.instance = new FSNInstanceImp(new BukkitMCPluginBase(this));	
 		logger.info("Plugin enabled!");
 	}
 	

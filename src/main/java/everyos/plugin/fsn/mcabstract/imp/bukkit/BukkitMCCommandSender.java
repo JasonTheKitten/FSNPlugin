@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.mcabstract.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -29,15 +29,13 @@ public class BukkitMCCommandSender implements MCCommandSender {
 	@Override
 	public void sendLocalizedMessage(String label, String... fillins) {
 		String message = getLocalizationProvider().localize(label, fillins);
-		String coloredMsg = ChatColor.translateAlternateColorCodes('&', message);
-		
-		sender.sendMessage(coloredMsg);
+		sendRawMessage(message);
 	}
 
 	@Override
 	public void sendRawMessage(String message) {
-		String coloredMsg = ChatColor.translateAlternateColorCodes('&', message);
-		sender.sendMessage(coloredMsg);
+		String coloredMessage = ChatColor.translateAlternateColorCodes('&', message);
+		sender.sendMessage(coloredMessage);
 	}
 
 }

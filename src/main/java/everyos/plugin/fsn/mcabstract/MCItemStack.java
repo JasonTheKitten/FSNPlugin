@@ -1,6 +1,6 @@
 package everyos.plugin.fsn.mcabstract;
 
-import everyos.plugin.fsn.stats.ItemStats;
+import everyos.plugin.fsn.mcabstract.stats.ItemStats;
 
 public interface MCItemStack {
 

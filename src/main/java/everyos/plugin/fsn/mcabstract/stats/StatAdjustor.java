@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.stats;
+package everyos.plugin.fsn.mcabstract.stats;
 
 public interface StatAdjustor {
 
