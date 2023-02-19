@@ -13,9 +13,11 @@ import everyos.plugin.fsn.mcabstract.event.MCEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerDeathEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerJoinEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLeaveEventListener;
+import everyos.plugin.fsn.mcabstract.event.MCPlayerLevelChangeEventListener;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerDeathEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerJoinEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerLeaveEventListenerWrapper;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerLevelChangeEventListenerWrapper;
 
 public class BukkitMCPluginBase implements MCPluginBase {
 	
@@ -49,6 +51,9 @@ public class BukkitMCPluginBase implements MCPluginBase {
 		}
 		if (listener instanceof MCPlayerDeathEventListener eventListener) {
 			addEvent(new PlayerDeathEventListenerWrapper(plugin, eventListener));
+		}
+		if (listener instanceof MCPlayerLevelChangeEventListener eventListener) {
+			addEvent(new PlayerLevelChangeEventListenerWrapper(plugin, eventListener));
 		}
 	}
 	

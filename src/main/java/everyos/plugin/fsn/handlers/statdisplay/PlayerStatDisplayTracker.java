@@ -1,27 +1,30 @@
 package everyos.plugin.fsn.handlers.statdisplay;
 
+import everyos.plugin.fsn.handlers.PlayerLevelHandler;
+import everyos.plugin.fsn.handlers.level.LevelUpListener;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
 import everyos.plugin.fsn.mcabstract.MCPluginBase;
 import everyos.plugin.fsn.mcabstract.MCTaskHandle;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLeaveEventListener;
 import everyos.plugin.fsn.mcabstract.stats.ItemStats;
 import everyos.plugin.fsn.mcabstract.stats.PlayerStats;
-import everyos.plugin.fsn.mcabstract.stats.StatsChangeListener;
 import everyos.plugin.fsn.mcabstract.stats.StatsContainer;
 
-public class PlayerStatDisplayTracker {
+public class PlayerStatDisplayTracker implements LevelUpListener {
 	
 	private static final String padding = "    ";
 	private static final int LEVEL_UP_DISPLAY_DURATION = 4000;
 	
 	private final MCPluginBase plugin;
+	private final PlayerLevelHandler levelHandler;
 	private final MCPlayer player;
 	
 	private LevelUpInfo previousLevelUp;
 	private LevelUpInfo currentLevelUp;
 
-	public PlayerStatDisplayTracker(MCPluginBase plugin, MCPlayer player) {
+	public PlayerStatDisplayTracker(MCPluginBase plugin, PlayerLevelHandler levelHandler, MCPlayer player) {
 		this.plugin = plugin;
+		this.levelHandler = levelHandler;
 		this.player = player;
 	}
 	
@@ -30,9 +33,18 @@ public class PlayerStatDisplayTracker {
 		registerChangeListeners();
 	}
 	
+	@Override
+	public void onLevelUp(MCPlayer player) {
+		if (!(player.getUUID().equals(this.player.getUUID()))) {
+			return;
+		}
+		
+		detectLevelUp();
+		updatePlayerStatDisplay();
+	}
+	
 	private void registerChangeListeners() {
-		StatsChangeListener listener = change -> updatePlayerStatDisplay();
-		player.getStats().addChangeListener(listener);
+		levelHandler.addLevelUpListener(this);
 		MCTaskHandle taskHandle = plugin
 			.getTaskScheduler()
 			.addRepeatingTask(() -> updatePlayerStatDisplay(), 0, 20);	
@@ -41,16 +53,23 @@ public class PlayerStatDisplayTracker {
 				return;
 			}
 			taskHandle.cancel();
-			player.getStats().removeEventListener(listener);
+			levelHandler.removeLevelUpListener(this);
 		});
 	}
 
 	private void updatePlayerStatDisplay() {
-		detectLevelUp();
+		clearOldLevelUp();
 		if (currentLevelUp != null) {
 			showLevelUpStatDisplay();
 		} else {
 			showNormalStatDisplay();
+		}
+	}
+
+	private void clearOldLevelUp() {
+		if (currentLevelUp != null && System.currentTimeMillis() - currentLevelUp.time() > LEVEL_UP_DISPLAY_DURATION) {
+			previousLevelUp = currentLevelUp;
+			currentLevelUp = null;
 		}
 	}
 
@@ -62,10 +81,6 @@ public class PlayerStatDisplayTracker {
 		}
 		if (currentLevelUp == null && previousLevelUp.level() != playerLevel) {
 			currentLevelUp = computeCurrentLevelUpInfo();
-		}
-		if (currentLevelUp != null && System.currentTimeMillis() - currentLevelUp.time() > LEVEL_UP_DISPLAY_DURATION) {
-			previousLevelUp = currentLevelUp;
-			currentLevelUp = null;
 		}
 	}
 	
