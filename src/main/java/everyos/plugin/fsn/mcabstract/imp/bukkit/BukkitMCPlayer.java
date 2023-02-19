@@ -36,7 +36,7 @@ public class BukkitMCPlayer extends BukkitMCCommandSender implements MCPlayer {
 	
 	@Override
 	public PlayerStats getStats() {
-		return new BukkitPlayerStats(plugin, player.getPersistentDataContainer());
+		return BukkitPlayerStats.getStats(plugin, player);
 	}
 	
 	@Override

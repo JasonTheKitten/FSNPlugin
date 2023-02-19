@@ -1,9 +1,13 @@
 package everyos.plugin.fsn.mcabstract.imp.bukkit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
@@ -13,13 +17,15 @@ import everyos.plugin.fsn.mcabstract.stats.StatAdjustor;
 import everyos.plugin.fsn.mcabstract.stats.StatsChangeListener;
 
 public class BukkitPlayerStats implements PlayerStats {
+	
+	private static final Map<UUID, PlayerStats> cache = new HashMap<>();
 
 	private final List<StatsChangeListener> listeners = new ArrayList<>();
 	
 	private final Plugin plugin;
 	private final PersistentDataContainer playerData;
 
-	public BukkitPlayerStats(Plugin plugin, PersistentDataContainer playerData) {
+	private BukkitPlayerStats(Plugin plugin, PersistentDataContainer playerData) {
 		this.plugin = plugin;
 		this.playerData = playerData;
 	}
@@ -89,6 +95,12 @@ public class BukkitPlayerStats implements PlayerStats {
 	@Override
 	public void removeEventListener(StatsChangeListener listener) {
 		listeners.remove(listener);
+	}
+	
+	public static PlayerStats getStats(Plugin plugin, Player player) {
+		return cache.computeIfAbsent(player.getUniqueId(), uuid -> {
+			return new BukkitPlayerStats(plugin, player.getPersistentDataContainer());
+		});
 	}
 
 }
