@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import everyos.plugin.fsn.mcabstract.MCHotbar;
 import everyos.plugin.fsn.mcabstract.MCInventory;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.MCXPBar;
 import everyos.plugin.fsn.mcabstract.stats.PlayerStats;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -48,6 +49,11 @@ public class BukkitMCPlayer extends BukkitMCCommandSender implements MCPlayer {
 	@Override
 	public UUID getUUID() {
 		return player.getUniqueId();
+	}
+
+	@Override
+	public MCXPBar getXPBar() {
+		return new BukkitMCXPBar(player);
 	}
 
 }

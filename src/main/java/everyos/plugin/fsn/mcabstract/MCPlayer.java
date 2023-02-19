@@ -11,6 +11,8 @@ public interface MCPlayer extends MCCommandSender {
 	MCHotbar getHotbar();
 
 	PlayerStats getStats();
+	
+	MCXPBar getXPBar();
 
 	void setDisplayBarText(String displayBar);
 
