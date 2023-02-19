@@ -30,7 +30,7 @@ tasks.named('test') {
 
 task relocateShadowJar(type: ConfigureShadowRelocation) {
     target = tasks.shadowJar
-    prefix = "ua" // Default value is "shadow"
+    prefix = "fsn"
 }
 
 tasks.prepareSpigotPlugins.dependsOn shadowJar
@@ -45,7 +45,7 @@ spigot {
     apiVersion = '1.19'
     commands {
         fsn {
-            aliases 'stats'
+            aliases 'itemstats'
             description = 'Item stats manipulation command'
             usage = '/<command> <subcommand> <statname> [amount]'
         }

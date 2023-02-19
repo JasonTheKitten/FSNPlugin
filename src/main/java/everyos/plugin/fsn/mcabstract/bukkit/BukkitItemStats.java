@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 
 import everyos.plugin.fsn.stats.ItemStats;
 import everyos.plugin.fsn.stats.StatAdjustor;
+import everyos.plugin.fsn.stats.util.StatsUtil;
 
 public class BukkitItemStats implements ItemStats {
 
@@ -31,6 +32,12 @@ public class BukkitItemStats implements ItemStats {
 		return stat == null ? 0 : stat;
 	}
 
+	@Override
+	public boolean isSet(String statName) {
+		PersistentDataContainer itemData = itemStack.getItemMeta().getPersistentDataContainer();
+		return itemData.has(new NamespacedKey(plugin, statName + "_stat"), PersistentDataType.FLOAT);
+	}
+	
 	@Override
 	public StatAdjustor adjust(String statName) {
 		ItemMeta itemMeta = itemStack.getItemMeta();
@@ -65,11 +72,18 @@ public class BukkitItemStats implements ItemStats {
 			public void decrease(float amount) {
 				increase(-amount);
 			}
+
+			@Override
+			public void reset() {
+				itemData.remove(key);
+				updateItemLore(itemMeta, statName, 0);
+				itemStack.setItemMeta(itemMeta);
+			}
 		};
 	}
 	
 	protected void updateItemLore(ItemMeta meta, String statName, float newAmount) {
-		String statDisplayName = generateDisplayName(statName);
+		String statDisplayName = StatsUtil.generateDisplayName(statName);
 		List<String> newLore = new ArrayList<>();
 		
 		if (meta.hasLore()) {
@@ -86,24 +100,6 @@ public class BukkitItemStats implements ItemStats {
 		}
 		
 		meta.setLore(newLore);
-	}
-
-	private String generateDisplayName(String statName) {
-		boolean lastCharIsWhitespace = true;
-		StringBuilder nameBuilder = new StringBuilder(statName.length());
-		
-		for (int ch: statName.codePoints().toArray()) {
-			if (ch == '_') {
-				lastCharIsWhitespace = true;
-				nameBuilder.append(' ');
-			} else if (lastCharIsWhitespace) {
-				nameBuilder.appendCodePoint(Character.toUpperCase(ch));
-				lastCharIsWhitespace = false;
-			} else {
-				nameBuilder.appendCodePoint(ch);
-			}
-		}
-		return nameBuilder.toString();
 	}
 
 }

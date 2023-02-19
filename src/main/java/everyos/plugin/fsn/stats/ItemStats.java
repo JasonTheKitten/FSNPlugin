@@ -20,5 +20,7 @@ public interface ItemStats {
 	float getByName(String statName);
 	
 	StatAdjustor adjust(String statName);
+
+	boolean isSet(String statName);
 	
 }

@@ -17,14 +17,18 @@ public class BukkitMCCommandSender implements MCCommandSender {
 		this.plugin = plugin;
 		this.sender = sender;
 	}
+	
+	@Override
+	public LocalizationProvider getLocalizationProvider() {
+		// TODO: Unwanted cast
+		return ((FSNPlugin) plugin)
+			.getCurrentInstance()
+			.getDefaultLocalizationProvider();
+	}
 
 	@Override
 	public void sendLocalizedMessage(String label, String... fillins) {
-		// TODO: Unwanted cast
-		LocalizationProvider localizationProvider = ((FSNPlugin) plugin)
-			.getCurrentInstance()
-			.getDefaultLocalizationProvider();
-		String message = localizationProvider.localize(label, fillins);
+		String message = getLocalizationProvider().localize(label, fillins);
 		String coloredMsg = ChatColor.translateAlternateColorCodes('&', message);
 		
 		sender.sendMessage(coloredMsg);

@@ -14,11 +14,11 @@ public class LocalizationProviderImp implements LocalizationProvider {
 	private Toml config;
 
 	public LocalizationProviderImp(Plugin plugin, String lang) {
+		
 		this.config = new Toml(
 			"messages/"+ lang,
 			plugin.getDataFolder().toString(),
-			plugin.getClass().getClassLoader().getResourceAsStream("messages/"+ lang + ".toml"));
-		config.forceReload();
+			plugin.getClass().getClassLoader().getResourceAsStream("messages/" + lang + ".toml"));
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import everyos.plugin.fsn.commandrunner.CommandRegistry;
 import everyos.plugin.fsn.commandrunner.bukkit.BukkitMCCommandRegistry;
-import everyos.plugin.fsn.commands.stats.StatsCommand;
+import everyos.plugin.fsn.commands.itemstats.ItemStatsCommand;
 import everyos.plugin.fsn.imp.FSNInstanceImp;
 
 public class FSNPlugin extends JavaPlugin {
@@ -24,7 +24,7 @@ public class FSNPlugin extends JavaPlugin {
 		this.instance = new FSNInstanceImp(this);
 		
 		CommandRegistry registry = new BukkitMCCommandRegistry(this);
-		registry.addCommand("stats", new StatsCommand());
+		registry.addCommand("itemstats", new ItemStatsCommand());
 		
 		logger.info("Plugin enabled!");
 	}

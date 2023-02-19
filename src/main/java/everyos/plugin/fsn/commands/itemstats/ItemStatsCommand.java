@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.commands.stats;
+package everyos.plugin.fsn.commands.itemstats;
 
 import java.util.List;
 
@@ -6,18 +6,20 @@ import everyos.plugin.fsn.commandrunner.CommandArguments;
 import everyos.plugin.fsn.commandrunner.PlayerCommand;
 import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
 import everyos.plugin.fsn.commandrunner.argument.SubcommandArgumentReader;
-import everyos.plugin.fsn.commands.stats.StatsAddCommand.Option;
+import everyos.plugin.fsn.commands.itemstats.ItemStatsAdjustCommand.Option;
 import everyos.plugin.fsn.mcabstract.MCPlayer;
 
-public class StatsCommand implements PlayerCommand {
+public class ItemStatsCommand implements PlayerCommand {
 
 	private SubcommandArgumentReader subcommandArgumentReader = new SubcommandArgumentReader();
 	
-	public StatsCommand() {
-		subcommandArgumentReader.addCommand("add", new StatsAddCommand(Option.ADD));
-		subcommandArgumentReader.addCommand("set", new StatsAddCommand(Option.SET));
-		subcommandArgumentReader.addCommand("sub", new StatsAddCommand(Option.SUB));
-		subcommandArgumentReader.addCommand("get", new StatsGetCommand());
+	public ItemStatsCommand() {
+		subcommandArgumentReader.addCommand("add", new ItemStatsAdjustCommand(Option.ADD));
+		subcommandArgumentReader.addCommand("set", new ItemStatsAdjustCommand(Option.SET));
+		subcommandArgumentReader.addCommand("sub", new ItemStatsAdjustCommand(Option.SUB));
+		subcommandArgumentReader.addCommand("get", new ItemStatsGetCommand());
+		subcommandArgumentReader.addCommand("summary", new ItemStatsSummaryCommand());
+		subcommandArgumentReader.addCommand("reset", new ItemStatsResetCommand());
 	}
 	
 	@Override

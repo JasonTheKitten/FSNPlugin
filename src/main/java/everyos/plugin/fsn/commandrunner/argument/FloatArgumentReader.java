@@ -6,7 +6,11 @@ public class FloatArgumentReader implements ArgumentReader<Float> {
 
 	@Override
 	public Float read(String value) {
-		return Float.valueOf(value);
+		try {
+			return Float.valueOf(value);
+		} catch (NumberFormatException e) {
+			throw new InvalidArgumentException();
+		}
 	}
 
 	@Override

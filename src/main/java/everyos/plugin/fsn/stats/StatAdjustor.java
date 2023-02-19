@@ -7,5 +7,7 @@ public interface StatAdjustor {
 	void decrease(float amount);
 	
 	void set(float amount);
+
+	void reset();
 	
 }
