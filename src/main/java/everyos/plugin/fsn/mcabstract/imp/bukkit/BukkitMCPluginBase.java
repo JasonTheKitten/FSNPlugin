@@ -9,15 +9,21 @@ import everyos.plugin.fsn.commandrunner.CommandRegistry;
 import everyos.plugin.fsn.commandrunner.bukkit.BukkitMCCommandRegistry;
 import everyos.plugin.fsn.mcabstract.MCPluginBase;
 import everyos.plugin.fsn.mcabstract.MCTaskScheduler;
+import everyos.plugin.fsn.mcabstract.event.MCEntityDamageEventListener;
+import everyos.plugin.fsn.mcabstract.event.MCEntityHealthRegenEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerDeathEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerJoinEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLeaveEventListener;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLevelChangeEventListener;
+import everyos.plugin.fsn.mcabstract.event.MCPlayerRespawnEventListener;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.event.EntityDamageEventListenerWrapper;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.event.EntityHealthRegenEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerDeathEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerJoinEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerLeaveEventListenerWrapper;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerLevelChangeEventListenerWrapper;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.event.PlayerRespawnEventListenerWrapper;
 
 public class BukkitMCPluginBase implements MCPluginBase {
 	
@@ -54,6 +60,15 @@ public class BukkitMCPluginBase implements MCPluginBase {
 		}
 		if (listener instanceof MCPlayerLevelChangeEventListener eventListener) {
 			addEvent(new PlayerLevelChangeEventListenerWrapper(plugin, eventListener));
+		}
+		if (listener instanceof MCPlayerRespawnEventListener eventListener) {
+			addEvent(new PlayerRespawnEventListenerWrapper(plugin, eventListener));
+		}
+		if (listener instanceof MCEntityDamageEventListener eventListener) {
+			addEvent(new EntityDamageEventListenerWrapper(plugin, eventListener));
+		}
+		if (listener instanceof MCEntityHealthRegenEventListener eventListener) {
+			addEvent(new EntityHealthRegenEventListenerWrapper(plugin, eventListener));
 		}
 	}
 	

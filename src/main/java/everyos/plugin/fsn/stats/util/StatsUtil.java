@@ -1,5 +1,8 @@
 package everyos.plugin.fsn.stats.util;
 
+import everyos.plugin.fsn.mcabstract.entity.MCEntity;
+import everyos.plugin.fsn.mcabstract.stats.StatsContainer;
+
 public final class StatsUtil {
 
 	private StatsUtil() {}
@@ -20,6 +23,19 @@ public final class StatsUtil {
 			}
 		}
 		return nameBuilder.toString();
+	}
+
+	public static float sumStats(MCEntity entity, String type) {
+		StatsContainer[] statsProviders = new StatsContainer[] {
+			entity.getStats()	
+		};
+		
+		float total = 0;
+		for (StatsContainer provider: statsProviders) {
+			total += provider.getByName(type);
+		}
+		
+		return total;
 	}
 	
 }

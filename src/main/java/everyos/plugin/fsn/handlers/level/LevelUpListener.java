@@ -1,6 +1,6 @@
 package everyos.plugin.fsn.handlers.level;
 
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 
 public interface LevelUpListener {
 

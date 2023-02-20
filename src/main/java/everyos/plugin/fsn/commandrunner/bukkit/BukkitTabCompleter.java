@@ -14,9 +14,9 @@ import everyos.plugin.fsn.commandrunner.MCCommand;
 import everyos.plugin.fsn.commandrunner.PlayerCommand;
 import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
 import everyos.plugin.fsn.mcabstract.MCCommandSender;
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCCommandSender;
-import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCPlayer;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.entity.BukkitMCPlayer;
 
 public class BukkitTabCompleter implements TabCompleter {
 

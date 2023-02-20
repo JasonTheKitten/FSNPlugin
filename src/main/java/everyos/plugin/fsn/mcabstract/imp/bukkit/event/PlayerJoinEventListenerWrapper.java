@@ -5,10 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerJoinEvent;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerJoinEventListener;
-import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCPlayer;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.entity.BukkitMCPlayer;
 
 public class PlayerJoinEventListenerWrapper implements Listener {
 

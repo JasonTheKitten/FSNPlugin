@@ -2,7 +2,7 @@ package everyos.plugin.fsn.commandrunner;
 
 import java.util.List;
 
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 
 public interface PlayerCommand extends MCCommand {
 

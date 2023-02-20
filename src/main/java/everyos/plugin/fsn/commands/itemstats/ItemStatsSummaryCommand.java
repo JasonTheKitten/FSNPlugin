@@ -9,7 +9,7 @@ import everyos.plugin.fsn.commandrunner.CommandArguments;
 import everyos.plugin.fsn.commandrunner.PlayerCommand;
 import everyos.plugin.fsn.localization.LocalizationProvider;
 import everyos.plugin.fsn.localization.LocalizedException;
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.stats.ItemStats;
 import everyos.plugin.fsn.stats.util.StatsUtil;
 

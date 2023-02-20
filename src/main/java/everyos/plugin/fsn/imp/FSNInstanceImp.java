@@ -3,6 +3,7 @@ package everyos.plugin.fsn.imp;
 import everyos.plugin.fsn.FSNInstance;
 import everyos.plugin.fsn.commandrunner.CommandRegistry;
 import everyos.plugin.fsn.commands.itemstats.ItemStatsCommand;
+import everyos.plugin.fsn.handlers.EntityDamageHandler;
 import everyos.plugin.fsn.handlers.PlayerLevelHandler;
 import everyos.plugin.fsn.handlers.PlayerStatDisplayUpdateHandler;
 import everyos.plugin.fsn.localization.LocalizationProvider;
@@ -40,6 +41,7 @@ public class FSNInstanceImp implements FSNInstance {
 		PlayerLevelHandler levelHandler = new PlayerLevelHandler();
 		plugin.registerEventListener(new PlayerStatDisplayUpdateHandler(plugin, levelHandler));
 		plugin.registerEventListener(levelHandler);
+		plugin.registerEventListener(new EntityDamageHandler());
 	}
 
 }

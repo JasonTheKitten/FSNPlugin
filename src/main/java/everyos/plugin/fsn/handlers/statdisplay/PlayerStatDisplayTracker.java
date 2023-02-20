@@ -2,13 +2,13 @@ package everyos.plugin.fsn.handlers.statdisplay;
 
 import everyos.plugin.fsn.handlers.PlayerLevelHandler;
 import everyos.plugin.fsn.handlers.level.LevelUpListener;
-import everyos.plugin.fsn.mcabstract.MCPlayer;
 import everyos.plugin.fsn.mcabstract.MCPluginBase;
 import everyos.plugin.fsn.mcabstract.MCTaskHandle;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerLeaveEventListener;
+import everyos.plugin.fsn.mcabstract.stats.EntityStats;
 import everyos.plugin.fsn.mcabstract.stats.ItemStats;
-import everyos.plugin.fsn.mcabstract.stats.PlayerStats;
-import everyos.plugin.fsn.mcabstract.stats.StatsContainer;
+import everyos.plugin.fsn.stats.util.StatsUtil;
 
 public class PlayerStatDisplayTracker implements LevelUpListener {
 	
@@ -99,12 +99,12 @@ public class PlayerStatDisplayTracker implements LevelUpListener {
 	}
 
 	private void showNormalStatDisplay() {
-		PlayerStats playerStats = player.getStats();
-		int maxHealth = (int) playerStats.getByName(PlayerStats.MAX_HEALTH_STAT);
-		int currentHealth = (int) playerStats.getByName(PlayerStats.CURRENT_HEALTH_STAT);
+		EntityStats playerStats = player.getStats();
+		int maxHealth = (int) playerStats.getByName(EntityStats.MAX_HEALTH_STAT);
+		int currentHealth = (int) playerStats.getByName(EntityStats.CURRENT_HEALTH_STAT);
 		int totalDefense = (int) getPlayerTotalDefense();
-		int currentMana = (int) playerStats.getByName(PlayerStats.CURRENT_MANA_STAT);
-		int maxMana = (int) playerStats.getByName(PlayerStats.MAX_MANA_STAT);
+		int currentMana = (int) playerStats.getByName(EntityStats.CURRENT_MANA_STAT);
+		int maxMana = (int) playerStats.getByName(EntityStats.MAX_MANA_STAT);
 		
 		// TODO: Localize text
 		String displayBar =
@@ -115,27 +115,14 @@ public class PlayerStatDisplayTracker implements LevelUpListener {
 	}
 
 	private float getPlayerTotalDefense() {
-		return sumPlayerStats(ItemStats.DEFENSE_STAT);
-	}
-
-	private float sumPlayerStats(String type) {
-		StatsContainer[] statsProviders = new StatsContainer[] {
-			player.getStats()	
-		};
-		
-		float total = 0;
-		for (StatsContainer provider: statsProviders) {
-			total += provider.getByName(type);
-		}
-		
-		return total;
+		return StatsUtil.sumStats(player, ItemStats.DEFENSE_STAT);
 	}
 	
 	private LevelUpInfo computeCurrentLevelUpInfo() {
-		PlayerStats playerStats = player.getStats();
-		int maxHealth = (int) playerStats.getByName(PlayerStats.MAX_HEALTH_STAT);
-		int defense = (int) playerStats.getByName(PlayerStats.DEFENSE_STAT);
-		int maxMana = (int) playerStats.getByName(PlayerStats.MAX_MANA_STAT);
+		EntityStats playerStats = player.getStats();
+		int maxHealth = (int) playerStats.getByName(EntityStats.MAX_HEALTH_STAT);
+		int defense = (int) playerStats.getByName(EntityStats.DEFENSE_STAT);
+		int maxMana = (int) playerStats.getByName(EntityStats.MAX_MANA_STAT);
 		
 		return new LevelUpInfo(
 			System.currentTimeMillis(),

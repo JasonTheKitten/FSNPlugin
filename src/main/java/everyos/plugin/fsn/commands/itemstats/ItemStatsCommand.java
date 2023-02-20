@@ -7,7 +7,7 @@ import everyos.plugin.fsn.commandrunner.PlayerCommand;
 import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
 import everyos.plugin.fsn.commandrunner.argument.SubcommandArgumentReader;
 import everyos.plugin.fsn.commands.itemstats.ItemStatsAdjustCommand.Option;
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 
 public class ItemStatsCommand implements PlayerCommand {
 

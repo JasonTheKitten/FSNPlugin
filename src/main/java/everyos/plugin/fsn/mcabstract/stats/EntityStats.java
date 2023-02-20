@@ -1,6 +1,6 @@
 package everyos.plugin.fsn.mcabstract.stats;
 
-public interface PlayerStats extends StatsContainer {
+public interface EntityStats extends StatsContainer {
 	
 	public static final String MAX_HEALTH_STAT = "max_health";
 	public static final String CURRENT_HEALTH_STAT = "current_health";

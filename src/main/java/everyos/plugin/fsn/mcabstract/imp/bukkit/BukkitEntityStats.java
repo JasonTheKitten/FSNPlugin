@@ -7,38 +7,38 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
-import everyos.plugin.fsn.mcabstract.stats.PlayerStats;
+import everyos.plugin.fsn.mcabstract.stats.EntityStats;
 import everyos.plugin.fsn.mcabstract.stats.StatAdjustor;
 import everyos.plugin.fsn.mcabstract.stats.StatsChangeListener;
 
-public class BukkitPlayerStats implements PlayerStats {
+public class BukkitEntityStats implements EntityStats {
 	
-	private static final Map<UUID, PlayerStats> cache = new HashMap<>();
+	private static final Map<UUID, EntityStats> cache = new HashMap<>();
 
 	private final List<StatsChangeListener> listeners = new ArrayList<>();
 	
 	private final Plugin plugin;
-	private final PersistentDataContainer playerData;
+	private final PersistentDataContainer entityData;
 
-	private BukkitPlayerStats(Plugin plugin, PersistentDataContainer playerData) {
+	private BukkitEntityStats(Plugin plugin, PersistentDataContainer playerData) {
 		this.plugin = plugin;
-		this.playerData = playerData;
+		this.entityData = playerData;
 	}
 
 	@Override
 	public float getByName(String statName) {
-		Float stat = playerData.get(new NamespacedKey(plugin, statName + "_stat"), PersistentDataType.FLOAT);
+		Float stat = entityData.get(new NamespacedKey(plugin, statName + "_stat"), PersistentDataType.FLOAT);
 		return stat == null ? 0 : stat;
 	}
 
 	@Override
 	public boolean isSet(String statName) {
-		return playerData.has(new NamespacedKey(plugin, statName + "_stat"), PersistentDataType.FLOAT);
+		return entityData.has(new NamespacedKey(plugin, statName + "_stat"), PersistentDataType.FLOAT);
 	}
 	
 	@Override
@@ -50,19 +50,19 @@ public class BukkitPlayerStats implements PlayerStats {
 			
 			@Override
 			public void set(float amount) {
-				playerData.set(key, type, amount);
+				entityData.set(key, type, amount);
 				triggerListeners(statName);
 			}
 
 			@Override
 			public void increase(float amount) {
-				Float oldAmount = playerData.get(key, type);
+				Float oldAmount = entityData.get(key, type);
 				if (oldAmount == null) {
 					oldAmount = 0f;
 				}
 				
 				float newAmount = Math.max(oldAmount + amount, 0);
-				playerData.set(key, type, newAmount);
+				entityData.set(key, type, newAmount);
 				triggerListeners(statName);
 			}
 			
@@ -74,7 +74,7 @@ public class BukkitPlayerStats implements PlayerStats {
 
 			@Override
 			public void reset() {
-				playerData.remove(key);
+				entityData.remove(key);
 				triggerListeners(statName);
 			}
 			
@@ -97,9 +97,9 @@ public class BukkitPlayerStats implements PlayerStats {
 		listeners.remove(listener);
 	}
 	
-	public static PlayerStats getStats(Plugin plugin, Player player) {
-		return cache.computeIfAbsent(player.getUniqueId(), uuid -> {
-			return new BukkitPlayerStats(plugin, player.getPersistentDataContainer());
+	public static EntityStats getStats(Plugin plugin, Entity entity) {
+		return cache.computeIfAbsent(entity.getUniqueId(), uuid -> {
+			return new BukkitEntityStats(plugin, entity.getPersistentDataContainer());
 		});
 	}
 

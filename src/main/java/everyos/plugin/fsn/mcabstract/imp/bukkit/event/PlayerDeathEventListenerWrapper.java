@@ -5,10 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.Plugin;
 
-import everyos.plugin.fsn.mcabstract.MCPlayer;
+import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerDeathEvent;
 import everyos.plugin.fsn.mcabstract.event.MCPlayerDeathEventListener;
-import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCPlayer;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.entity.BukkitMCPlayer;
 
 public class PlayerDeathEventListenerWrapper implements Listener {
 
