@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.mcabstract.imp.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit.stats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,11 +95,30 @@ public class BukkitItemStats implements ItemStats {
 		}
 		
 		if (newAmount != 0) {
-			String prefix = ChatColor.COLOR_CHAR + "6";
+			String prefix = ChatColor.COLOR_CHAR + getStatColor(statName);
 			newLore.add(prefix + statDisplayName + ": " + newAmount);
 		}
 		
 		meta.setLore(newLore);
+	}
+
+	private String getStatColor(String statName) {
+		switch (statName) {
+		case ItemStats.ATTACK_POWER_STAT:
+			return "c";
+		case ItemStats.CRITICAL_CHANCE_STAT:
+		case ItemStats.MAX_CRITICAL_PERCENT_STAT:
+		case ItemStats.MIN_CRITICAL_PERCENT_STAT:
+			return "9";
+		case ItemStats.DEFENSE_STAT:
+			return "a";
+		case ItemStats.EVASION_STAT:
+		case ItemStats.SPEED_STAT:
+			return "f";
+		case ItemStats.FORTUNE_STAT:
+		default:
+			return "6";
+		}
 	}
 
 }

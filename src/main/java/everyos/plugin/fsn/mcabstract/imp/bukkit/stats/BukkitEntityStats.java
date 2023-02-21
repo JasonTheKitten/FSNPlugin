@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.mcabstract.imp.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit.stats;
 
 import java.util.ArrayList;
 import java.util.HashMap;

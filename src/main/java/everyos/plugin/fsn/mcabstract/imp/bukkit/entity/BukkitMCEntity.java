@@ -7,7 +7,7 @@ import org.bukkit.plugin.Plugin;
 
 import everyos.plugin.fsn.mcabstract.entity.MCEntity;
 import everyos.plugin.fsn.mcabstract.entity.MCEntityInterface;
-import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitEntityStats;
+import everyos.plugin.fsn.mcabstract.imp.bukkit.stats.BukkitEntityStats;
 import everyos.plugin.fsn.mcabstract.stats.EntityStats;
 
 public class BukkitMCEntity implements MCEntity {
