@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.commandrunner.argument;
+package everyos.plugin.fsn.argument;
 
 public class InvalidArgumentException extends RuntimeException {
 

@@ -2,11 +2,11 @@ package everyos.plugin.fsn.commands.itemstats;
 
 import java.util.List;
 
-import everyos.plugin.fsn.commandrunner.CommandArguments;
-import everyos.plugin.fsn.commandrunner.PlayerCommand;
-import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
-import everyos.plugin.fsn.commandrunner.argument.SubcommandArgumentReader;
+import everyos.plugin.fsn.argument.InvalidArgumentException;
+import everyos.plugin.fsn.argument.SubcommandArgumentReader;
 import everyos.plugin.fsn.commands.itemstats.ItemStatsAdjustCommand.Option;
+import everyos.plugin.fsn.mcabstract.command.CommandArguments;
+import everyos.plugin.fsn.mcabstract.command.PlayerCommand;
 import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 
 public class ItemStatsCommand implements PlayerCommand {

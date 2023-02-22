@@ -3,12 +3,12 @@ package everyos.plugin.fsn.commands.itemstats;
 import java.util.List;
 import java.util.Optional;
 
-import everyos.plugin.fsn.commandrunner.CommandArguments;
-import everyos.plugin.fsn.commandrunner.PlayerCommand;
-import everyos.plugin.fsn.commandrunner.argument.ArgumentReader;
-import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
-import everyos.plugin.fsn.commandrunner.argument.OptionsArgumentReader;
+import everyos.plugin.fsn.argument.ArgumentReader;
+import everyos.plugin.fsn.argument.InvalidArgumentException;
+import everyos.plugin.fsn.argument.OptionsArgumentReader;
 import everyos.plugin.fsn.localization.LocalizedException;
+import everyos.plugin.fsn.mcabstract.command.CommandArguments;
+import everyos.plugin.fsn.mcabstract.command.PlayerCommand;
 import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.stats.ItemStats;
 

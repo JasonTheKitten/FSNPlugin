@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.commandrunner;
+package everyos.plugin.fsn.mcabstract.command;
 
 public interface CommandRegistry {
 

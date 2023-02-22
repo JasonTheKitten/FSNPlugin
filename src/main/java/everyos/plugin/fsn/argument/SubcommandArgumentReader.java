@@ -1,11 +1,11 @@
-package everyos.plugin.fsn.commandrunner.argument;
+package everyos.plugin.fsn.argument;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import everyos.plugin.fsn.commandrunner.MCCommand;
+import everyos.plugin.fsn.mcabstract.command.MCCommand;
 
 public class SubcommandArgumentReader implements ArgumentReader<MCCommand> {
 	

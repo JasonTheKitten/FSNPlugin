@@ -1,10 +1,10 @@
-package everyos.plugin.fsn.commandrunner.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit.command;
 
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import everyos.plugin.fsn.commandrunner.CommandRegistry;
-import everyos.plugin.fsn.commandrunner.MCCommand;
+import everyos.plugin.fsn.mcabstract.command.CommandRegistry;
+import everyos.plugin.fsn.mcabstract.command.MCCommand;
 
 public class BukkitMCCommandRegistry implements CommandRegistry {
 

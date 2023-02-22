@@ -1,4 +1,4 @@
-package everyos.plugin.fsn.commandrunner.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit.command;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import everyos.plugin.fsn.commandrunner.CommandArguments;
-import everyos.plugin.fsn.commandrunner.GeneralCommand;
-import everyos.plugin.fsn.commandrunner.MCCommand;
-import everyos.plugin.fsn.commandrunner.PlayerCommand;
-import everyos.plugin.fsn.commandrunner.argument.InvalidArgumentException;
+import everyos.plugin.fsn.argument.InvalidArgumentException;
 import everyos.plugin.fsn.mcabstract.MCCommandSender;
+import everyos.plugin.fsn.mcabstract.command.CommandArguments;
+import everyos.plugin.fsn.mcabstract.command.GeneralCommand;
+import everyos.plugin.fsn.mcabstract.command.MCCommand;
+import everyos.plugin.fsn.mcabstract.command.PlayerCommand;
 import everyos.plugin.fsn.mcabstract.entity.MCPlayer;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.BukkitMCCommandSender;
 import everyos.plugin.fsn.mcabstract.imp.bukkit.entity.BukkitMCPlayer;

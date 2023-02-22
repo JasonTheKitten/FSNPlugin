@@ -1,11 +1,11 @@
-package everyos.plugin.fsn.commandrunner.argument;
+package everyos.plugin.fsn.argument;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OptionsArgumentReader implements ArgumentReader<String> {
 	
-	private String[] options;
+	private final String[] options;
 
 	public OptionsArgumentReader(String[] options) {
 		this.options = options;
@@ -26,7 +26,7 @@ public class OptionsArgumentReader implements ArgumentReader<String> {
 	public List<String> autocomplete(String value) {
 		List<String> autocompletes = new ArrayList<>();
 		for (String option: options) {
-			if (option.contains(value)) {
+			if (option.toLowerCase().contains(value.toLowerCase())) {
 				autocompletes.add(option);
 			}
 		}

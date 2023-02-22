@@ -1,9 +1,9 @@
-package everyos.plugin.fsn.commandrunner.bukkit;
+package everyos.plugin.fsn.mcabstract.imp.bukkit.command;
 
 import java.util.List;
 
-import everyos.plugin.fsn.commandrunner.CommandArguments;
-import everyos.plugin.fsn.commandrunner.argument.ArgumentReader;
+import everyos.plugin.fsn.argument.ArgumentReader;
+import everyos.plugin.fsn.mcabstract.command.CommandArguments;
 
 public class BukkitCommandArguments implements CommandArguments {
 

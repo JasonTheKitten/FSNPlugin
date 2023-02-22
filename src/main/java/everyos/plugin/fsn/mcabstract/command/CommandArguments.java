@@ -1,8 +1,8 @@
-package everyos.plugin.fsn.commandrunner;
+package everyos.plugin.fsn.mcabstract.command;
 
 import java.util.List;
 
-import everyos.plugin.fsn.commandrunner.argument.ArgumentReader;
+import everyos.plugin.fsn.argument.ArgumentReader;
 
 public interface CommandArguments {
 

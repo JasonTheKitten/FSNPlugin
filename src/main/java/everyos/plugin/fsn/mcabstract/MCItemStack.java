@@ -5,5 +5,7 @@ import everyos.plugin.fsn.mcabstract.stats.ItemStats;
 public interface MCItemStack {
 
 	ItemStats getItemStats();
+
+	MCMaterial getMaterial();
 	
 }
