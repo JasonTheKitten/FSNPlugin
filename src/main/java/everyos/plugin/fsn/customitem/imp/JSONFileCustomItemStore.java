@@ -1,23 +1,30 @@
 package everyos.plugin.fsn.customitem.imp;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.mccue.json.Json;
+import dev.mccue.json.JsonDecoder;
+import dev.mccue.json.JsonWriteOptions;
 import everyos.plugin.fsn.customitem.CustomItem;
 import everyos.plugin.fsn.customitem.CustomItemCreationOptions;
 import everyos.plugin.fsn.customitem.CustomItemStore;
 
 public class JSONFileCustomItemStore implements CustomItemStore {
 	
-	private final List<CustomItem> items = new ArrayList<>();
+	private final List<JSONCustomItemImp> items;
 	
-	@SuppressWarnings("unused")
 	private final File source;
 
 	public JSONFileCustomItemStore(File source) {
 		this.source = source;
-		
+		this.items = loadConfig();
 	}
 
 	@Override
@@ -27,9 +34,9 @@ public class JSONFileCustomItemStore implements CustomItemStore {
 	
 	@Override
 	public CustomItem createCustomItem(CustomItemCreationOptions options) {
-		regenerateConfig();
-		CustomItem item = new CustomItemImp(options);
+		JSONCustomItemImp item = new JSONCustomItemImp(options);
 		items.add(item);
+		regenerateConfig();
 		return item;
 	}
 
@@ -49,10 +56,29 @@ public class JSONFileCustomItemStore implements CustomItemStore {
 		
 		return false;
 	}
+	
+	private List<JSONCustomItemImp> loadConfig() {
+		try (Reader inputReader = Files.newBufferedReader(source.toPath())) {
+			Json json = Json.read(inputReader);
+			List<JSONCustomItemImp> customItems = new ArrayList<>();
+			customItems.addAll(JsonDecoder.array(json, JSONCustomItemImp::fromJson));
+			return customItems;
+		} catch (NoSuchFileException e) {
+			return List.of();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private void regenerateConfig() {
-		// TODO Auto-generated method stub
-		
+		Json encoded = Json.of(items);
+		JsonWriteOptions options = new JsonWriteOptions()
+			.withIndentation(4);
+		try (Writer outputWriter = Files.newBufferedWriter(source.toPath())) {
+			Json.write(encoded, outputWriter, options);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 }

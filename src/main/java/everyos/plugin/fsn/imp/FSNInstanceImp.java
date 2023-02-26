@@ -1,6 +1,7 @@
 package everyos.plugin.fsn.imp;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import everyos.plugin.fsn.FSNInstance;
 import everyos.plugin.fsn.commands.customitems.CustomItemsCommand;
@@ -53,7 +54,11 @@ public class FSNInstanceImp implements FSNInstance {
 	}
 	
 	private CustomItemStore createCustomItemStore() {
-		File source = new File(plugin.getSaveFolder() + "/customitems.json");
+		File source = plugin
+			.getSaveFolder()
+			.toPath()
+			.resolve("customitems.json")
+			.toFile();
 		return new JSONFileCustomItemStore(source);
 	}
 
